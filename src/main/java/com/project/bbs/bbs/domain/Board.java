@@ -27,9 +27,19 @@ public class Board {
     @Column
     private String nickname;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = true)
     private LocalDateTime createdAt;
 
-    @Column(name = "modified_at")
+    @Column(name = "modified_at", nullable = true)
     private LocalDateTime modifiedAt;
+
+    @PrePersist
+    void created() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void updated() {
+        this.modifiedAt = LocalDateTime.now();
+    }
 }

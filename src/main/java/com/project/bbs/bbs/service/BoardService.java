@@ -32,4 +32,8 @@ public class BoardService {
         final Board board = boardRepository.findById(id).orElse(new Board());
         return modelMapper.map(board, BoardDto.class); // board -> BoardDto;
     }
+
+    public void save(BoardDto boardDto) {
+        boardRepository.save(modelMapper.map(boardDto, Board.class));
+    }
 }
